@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_products_variants",
+  "info": {
+    "displayName": "variants",
+    "icon": "information"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "price": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  bluepharm_database:
+    image: postgres:12-alpine
+    restart: always
+    container_name: bluepharm-database-docker
+    environment:
+      - POSTGRES_USER=bluepharm
+      - POSTGRES_PASSWORD=bluepharm
+      - POSTGRES_DB=bluepharm
+    ports:
+      - 5450:5432
+    volumes:
+      -  ../../postgres:/var/lib/postgresql/data/
+
