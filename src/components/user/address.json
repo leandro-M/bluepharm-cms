@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_user_addresses",
+  "info": {
+    "displayName": "address",
+    "icon": "pinMap"
+  },
+  "options": {},
+  "attributes": {
+    "cep": {
+      "type": "string"
+    },
+    "street": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string"
+    },
+    "neighborhood": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "complement": {
+      "type": "string"
+    }
+  }
+}

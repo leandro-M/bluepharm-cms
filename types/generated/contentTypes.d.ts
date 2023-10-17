@@ -631,7 +631,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -660,6 +659,13 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    whatsapp: Attribute.String;
+    rg: Attribute.String;
+    cpf: Attribute.String;
+    dateOfBirth: Attribute.String;
+    address: Attribute.Component<'user.address'>;
+    codeConfirmation: Attribute.String;
+    name: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -677,38 +683,43 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginPasswordlessToken extends Schema.CollectionType {
-  collectionName: 'tokens';
+export interface ApiAnamnesisAnamnesis extends Schema.CollectionType {
+  collectionName: 'anamneses';
   info: {
-    singularName: 'token';
-    pluralName: 'tokens';
-    displayName: 'Token';
-    name: 'token';
+    singularName: 'anamnesis';
+    pluralName: 'anamneses';
+    displayName: 'anamnesis';
+    description: '';
   };
   options: {
-    increments: false;
-    timestamps: true;
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
-    email: Attribute.Email & Attribute.Required & Attribute.Private;
-    body: Attribute.String &
-      Attribute.Required &
-      Attribute.Private &
-      Attribute.Unique;
-    context: Attribute.JSON & Attribute.Private;
-    login_date: Attribute.DateTime;
-    is_active: Attribute.Boolean & Attribute.DefaultTo<true>;
+    screenings: Attribute.Relation<
+      'api::anamnesis.anamnesis',
+      'oneToMany',
+      'api::screening.screening'
+    >;
+    customer: Attribute.Relation<
+      'api::anamnesis.anamnesis',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    term: Attribute.Component<'anamnesis.term'>;
+    paymentId: Attribute.String;
+    status: Attribute.String;
+    paymentClient: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'plugin::passwordless.token',
+      'api::anamnesis.anamnesis',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'plugin::passwordless.token',
+      'api::anamnesis.anamnesis',
       'oneToOne',
       'admin::user'
     > &
@@ -809,6 +820,49 @@ export interface ApiContraindicationContraindication
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::contraindication.contraindication',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMedicalAppointmentMedicalAppointment
+  extends Schema.CollectionType {
+  collectionName: 'medical_appointments';
+  info: {
+    singularName: 'medical-appointment';
+    pluralName: 'medical-appointments';
+    displayName: 'Medical Appointment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    anamnesis: Attribute.Relation<
+      'api::medical-appointment.medical-appointment',
+      'oneToOne',
+      'api::anamnesis.anamnesis'
+    >;
+    scheduleDate: Attribute.DateTime;
+    doctor: Attribute.Relation<
+      'api::medical-appointment.medical-appointment',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    room: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::medical-appointment.medical-appointment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::medical-appointment.medical-appointment',
       'oneToOne',
       'admin::user'
     > &
@@ -1010,6 +1064,36 @@ export interface ApiProductProduct extends Schema.CollectionType {
   };
 }
 
+export interface ApiScreeningScreening extends Schema.CollectionType {
+  collectionName: 'screenings';
+  info: {
+    singularName: 'screening';
+    pluralName: 'screenings';
+    displayName: 'Screening';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::screening.screening',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::screening.screening',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTermAndConditionTermAndCondition extends Schema.SingleType {
   collectionName: 'terms_and_conditions';
   info: {
@@ -1056,15 +1140,17 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::passwordless.token': PluginPasswordlessToken;
+      'api::anamnesis.anamnesis': ApiAnamnesisAnamnesis;
       'api::anvisa-licence.anvisa-licence': ApiAnvisaLicenceAnvisaLicence;
       'api::cart.cart': ApiCartCart;
       'api::contraindication.contraindication': ApiContraindicationContraindication;
+      'api::medical-appointment.medical-appointment': ApiMedicalAppointmentMedicalAppointment;
       'api::medical-report.medical-report': ApiMedicalReportMedicalReport;
       'api::order.order': ApiOrderOrder;
       'api::power-of-attorney.power-of-attorney': ApiPowerOfAttorneyPowerOfAttorney;
       'api::prescription.prescription': ApiPrescriptionPrescription;
       'api::product.product': ApiProductProduct;
+      'api::screening.screening': ApiScreeningScreening;
       'api::term-and-condition.term-and-condition': ApiTermAndConditionTermAndCondition;
     }
   }

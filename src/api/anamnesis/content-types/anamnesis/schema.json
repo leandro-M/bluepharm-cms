@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "anamneses",
+  "info": {
+    "singularName": "anamnesis",
+    "pluralName": "anamneses",
+    "displayName": "anamnesis",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "screenings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::screening.screening"
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "term": {
+      "displayName": "Term",
+      "type": "component",
+      "repeatable": false,
+      "component": "anamnesis.term"
+    },
+    "paymentId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "paymentClient": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "medical_appointments",
+  "info": {
+    "singularName": "medical-appointment",
+    "pluralName": "medical-appointments",
+    "displayName": "Medical Appointment",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "anamnesis": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::anamnesis.anamnesis"
+    },
+    "scheduleDate": {
+      "type": "datetime"
+    },
+    "doctor": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "room": {
+      "type": "string"
+    }
+  }
+}

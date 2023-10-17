@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_anamnesis_terms",
+  "info": {
+    "displayName": "Term",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "idTermOfResponsibility": {
+      "type": "string"
+    },
+    "termOfResponsibilitySigned": {
+      "type": "boolean"
+    },
+    "idTermOfVeracity": {
+      "type": "string"
+    },
+    "termOfVeracitySigned": {
+      "type": "boolean"
+    },
+    "linkTermOfResponsibility": {
+      "type": "string"
+    },
+    "linkTermOfVeracity": {
+      "type": "string"
+    }
+  }
+}
