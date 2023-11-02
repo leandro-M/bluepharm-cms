@@ -1046,6 +1046,11 @@ export interface ApiProductProduct extends Schema.CollectionType {
     thc: Attribute.String;
     variants: Attribute.Component<'products.variants', true>;
     medias: Attribute.Media;
+    store: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'api::store.store'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1087,6 +1092,36 @@ export interface ApiScreeningScreening extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::screening.screening',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoreStore extends Schema.CollectionType {
+  collectionName: 'stores';
+  info: {
+    singularName: 'store';
+    pluralName: 'stores';
+    displayName: 'Store';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store.store',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store.store',
       'oneToOne',
       'admin::user'
     > &
@@ -1151,6 +1186,7 @@ declare module '@strapi/types' {
       'api::prescription.prescription': ApiPrescriptionPrescription;
       'api::product.product': ApiProductProduct;
       'api::screening.screening': ApiScreeningScreening;
+      'api::store.store': ApiStoreStore;
       'api::term-and-condition.term-and-condition': ApiTermAndConditionTermAndCondition;
     }
   }
