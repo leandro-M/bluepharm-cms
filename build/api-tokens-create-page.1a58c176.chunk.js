@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbluepharm_cms=self.webpackChunkbluepharm_cms||[]).push([[4299],{1880:(r,t,e)=>{e.r(t),e.d(t,{default:()=>a});var s=e(67294),E=e(17129),_=e(86706),n=e(36364),P=e(92458);const a=()=>{const l=(0,_.v9)(n._);return s.createElement(E.O4,{permissions:l.settings["api-tokens"].create},s.createElement(P.Z,null))}}}]);
