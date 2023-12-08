@@ -852,6 +852,12 @@ export interface ApiMedicalAppointmentMedicalAppointment
       'plugin::users-permissions.user'
     >;
     room: Attribute.String;
+    status: Attribute.Enumeration<['scheduled', 'inmeeting', 'done']>;
+    customer: Attribute.Relation<
+      'api::medical-appointment.medical-appointment',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
