@@ -1201,6 +1201,42 @@ export interface ApiUserDocumentUserDocument extends Schema.CollectionType {
   };
 }
 
+export interface ApiUserPaymentUserPayment extends Schema.CollectionType {
+  collectionName: 'user_payments';
+  info: {
+    singularName: 'user-payment';
+    pluralName: 'user-payments';
+    displayName: 'User Payment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    provider: Attribute.String;
+    customerPaymentId: Attribute.String;
+    customer: Attribute.Relation<
+      'api::user-payment.user-payment',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-payment.user-payment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-payment.user-payment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1231,6 +1267,7 @@ declare module '@strapi/types' {
       'api::store.store': ApiStoreStore;
       'api::term-and-condition.term-and-condition': ApiTermAndConditionTermAndCondition;
       'api::user-document.user-document': ApiUserDocumentUserDocument;
+      'api::user-payment.user-payment': ApiUserPaymentUserPayment;
     }
   }
 }
