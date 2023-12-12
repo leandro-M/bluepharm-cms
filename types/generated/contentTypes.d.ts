@@ -1165,6 +1165,42 @@ export interface ApiTermAndConditionTermAndCondition extends Schema.SingleType {
   };
 }
 
+export interface ApiUserDocumentUserDocument extends Schema.CollectionType {
+  collectionName: 'user_documents';
+  info: {
+    singularName: 'user-document';
+    pluralName: 'user-documents';
+    displayName: 'User Documents';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    type: Attribute.String;
+    document: Attribute.Media;
+    customer: Attribute.Relation<
+      'api::user-document.user-document',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-document.user-document',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-document.user-document',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1194,6 +1230,7 @@ declare module '@strapi/types' {
       'api::screening.screening': ApiScreeningScreening;
       'api::store.store': ApiStoreStore;
       'api::term-and-condition.term-and-condition': ApiTermAndConditionTermAndCondition;
+      'api::user-document.user-document': ApiUserDocumentUserDocument;
     }
   }
 }
