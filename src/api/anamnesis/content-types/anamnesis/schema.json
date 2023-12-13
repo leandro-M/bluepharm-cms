@@ -36,6 +36,9 @@
     },
     "paymentClient": {
       "type": "string"
+    },
+    "paymentProvider": {
+      "type": "string"
     }
   }
 }

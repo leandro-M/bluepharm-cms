@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payment_statuses",
+  "info": {
+    "singularName": "payment-status",
+    "pluralName": "payment-statuses",
+    "displayName": "Payment Status"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "status": {
+      "type": "string"
+    },
+    "paymentId": {
+      "type": "string"
+    },
+    "paymentProvider": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    }
+  }
+}

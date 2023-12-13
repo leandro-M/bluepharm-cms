@@ -709,6 +709,7 @@ export interface ApiAnamnesisAnamnesis extends Schema.CollectionType {
     paymentId: Attribute.String;
     status: Attribute.String;
     paymentClient: Attribute.String;
+    paymentProvider: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -950,6 +951,39 @@ export interface ApiOrderOrder extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPaymentStatusPaymentStatus extends Schema.CollectionType {
+  collectionName: 'payment_statuses';
+  info: {
+    singularName: 'payment-status';
+    pluralName: 'payment-statuses';
+    displayName: 'Payment Status';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    status: Attribute.String;
+    paymentId: Attribute.String;
+    paymentProvider: Attribute.String;
+    customerId: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::payment-status.payment-status',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::payment-status.payment-status',
       'oneToOne',
       'admin::user'
     > &
@@ -1260,6 +1294,7 @@ declare module '@strapi/types' {
       'api::medical-appointment.medical-appointment': ApiMedicalAppointmentMedicalAppointment;
       'api::medical-report.medical-report': ApiMedicalReportMedicalReport;
       'api::order.order': ApiOrderOrder;
+      'api::payment-status.payment-status': ApiPaymentStatusPaymentStatus;
       'api::power-of-attorney.power-of-attorney': ApiPowerOfAttorneyPowerOfAttorney;
       'api::prescription.prescription': ApiPrescriptionPrescription;
       'api::product.product': ApiProductProduct;
