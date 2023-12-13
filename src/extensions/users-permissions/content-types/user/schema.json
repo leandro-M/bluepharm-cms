@@ -88,6 +88,12 @@
     },
     "name": {
       "type": "string"
+    },
+    "crm": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
     }
   }
 }

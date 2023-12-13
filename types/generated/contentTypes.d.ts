@@ -666,6 +666,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     address: Attribute.Component<'user.address'>;
     codeConfirmation: Attribute.String;
     name: Attribute.String;
+    crm: Attribute.String;
+    gender: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
