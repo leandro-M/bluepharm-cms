@@ -1036,6 +1036,7 @@ export interface ApiPrescriptionPrescription extends Schema.CollectionType {
     singularName: 'prescription';
     pluralName: 'prescriptions';
     displayName: 'prescription';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1053,6 +1054,7 @@ export interface ApiPrescriptionPrescription extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    pdfTemplate: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

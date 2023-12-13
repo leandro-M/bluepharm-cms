@@ -4,7 +4,8 @@
   "info": {
     "singularName": "prescription",
     "pluralName": "prescriptions",
-    "displayName": "prescription"
+    "displayName": "prescription",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,14 +16,15 @@
       "type": "string"
     },
     "documents": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "doctor": {
       "type": "relation",
@@ -33,6 +35,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "pdfTemplate": {
+      "type": "text"
     }
   }
 }
