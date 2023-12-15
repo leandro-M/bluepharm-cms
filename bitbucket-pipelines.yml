@@ -12,7 +12,7 @@ pipelines:
         deployment: production
         script:
           - tar -czf build.tar.gz ./build
-          - pipe: atlassian/scp-deploy:1.0.4
+          - pipe: atlassian/scp-deploy:1.4.1
             variables:
               USER: '$SSH_USER'
               SERVER: '$SSH_HOST'
@@ -21,7 +21,7 @@ pipelines:
               DEBUG: 'true'
               EXTRA_ARGS: '-i $BITBUCKET_PIPE_SSH_PRIVATE_KEY_PATH'
           # Utilizando atlassian/ssh-run para executar comandos no servidor
-          - pipe: atlassian/ssh-run:0.2.8
+          - pipe: atlassian/ssh-run:0.7.1
             variables:
               SSH_USER: '$SSH_USER'
               SERVER: '$SSH_HOST'
