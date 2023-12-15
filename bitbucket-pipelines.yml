@@ -3,14 +3,15 @@ image: node:18
 pipelines:
   default:
     - step:
-        name: Build and Deploy
-        deployment: production
+        name: 'Build'
         script:
           - yarn install
           - yarn build
-          # Compactando os arquivos
+    - step:
+        name: 'Deployment to Production'
+        deployment: production
+        script:
           - tar -czf build.tar.gz ./build
-          # Utilizando atlassian/scp-deploy para enviar o arquivo
           - pipe: atlassian/scp-deploy:1.0.4
             variables:
               USER: '$SSH_USER'
