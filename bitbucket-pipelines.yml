@@ -18,11 +18,11 @@ pipelines:
               SERVER: '$SSH_HOST'
               REMOTE_PATH: '$DEPLOY_DIRECTORY'
               LOCAL_PATH: 'build.tar.gz'
-              SSH_KEY: '$BITBUCKET_PIPE_SSH_PRIVATE_KEY_PATH'
+              SSH_KEY: '$BITBUCKET_SSH_KEY_FILE'
           # Utilizando atlassian/ssh-run para executar comandos no servidor
           - pipe: atlassian/ssh-run:0.7.1
             variables:
               SSH_USER: '$SSH_USER'
               SERVER: '$SSH_HOST'
               COMMAND: 'rm -rf $DEPLOY_DIRECTORY/previous_build; mv $DEPLOY_DIRECTORY/current_build $DEPLOY_DIRECTORY/previous_build; mkdir $DEPLOY_DIRECTORY/current_build; tar -xzf $DEPLOY_DIRECTORY/build.tar.gz -C $DEPLOY_DIRECTORY/current_build; cd $DEPLOY_DIRECTORY/current_build; pm2 stop all; pm2 start'
-              SSH_KEY: '$BITBUCKET_PIPE_SSH_PRIVATE_KEY'
+              SSH_KEY: '$BITBUCKET_SSH_KEY_FILE'
