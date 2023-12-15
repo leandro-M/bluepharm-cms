@@ -18,8 +18,7 @@ pipelines:
               SERVER: '$SSH_HOST'
               REMOTE_PATH: '$DEPLOY_DIRECTORY'
               LOCAL_PATH: 'build.tar.gz'
-              DEBUG: 'true'
-              EXTRA_ARGS: '-i $BITBUCKET_PIPE_SSH_PRIVATE_KEY_PATH'
+              SSH_KEY: '$BITBUCKET_PIPE_SSH_PRIVATE_KEY_PATH'
           # Utilizando atlassian/ssh-run para executar comandos no servidor
           - pipe: atlassian/ssh-run:0.7.1
             variables:
